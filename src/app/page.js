@@ -1,112 +1,227 @@
+"use client";
+import React, { useRef } from "react";
+
+//next features/optimization
 import Image from "next/image";
+//font
+import { oswald } from "@/app/layout";
+
+//logos
+import harbourLogo from "../../public/logo/harbourLightsLogo.png";
+
+//constants utilitits
+import { features } from "@/app/constants/features";
+import { characterstics } from "@/app/constants/characterstics";
+
+//components
+import FeaturesCard from "@/components/FeaturesCard";
+import ImageGallery from "@/components/ImageGallery";
+
+//animation gsap things
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
+import Navbar from "@/components/Navbar";
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const animationRef = useRef();
+
+  useGSAP(() => {
+    gsap.from(animationRef.current, {
+      opacity: "0",
+      y: 100,
+      duration: 1,
+    });
+    gsap.from("#text-animation", {
+      opacity: "0",
+      y: 50,
+      duration: 1,
+    });
+    gsap.from("#character-animation", {
+      opacity: "0",
+      y: 50,
+      duration: 1,
+      scrollTrigger: {
+        trigger: "#character-animation",
+        scroller: "body",
+        start: "top 50%",
+      },
+    });
+    gsap.from("#feature-animation", {
+      opacity: "0",
+      y: 50,
+      duration: 1,
+      scrollTrigger: {
+        trigger: "#feature-animation",
+        scroller: "body",
+        start: "top 50%",
+      },
+    });
+    gsap.from("#bigimage-animation", {
+      opacity: "0",
+      y: 50,
+      duration: 1,
+      scrollTrigger: {
+        trigger: "#bigimage-animation",
+        scroller: "body",
+        start: "top 50%",
+      },
+    });
+    gsap.from("#smallimage-animation", {
+      opacity: "0",
+      y: 50,
+      duration: 1,
+      scrollTrigger: {
+        trigger: "#smallimage-animation",
+        scroller: "body",
+        start: "top 80%",
+      },
+    });
+  });
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main>
+      <div className="h-[100vh] bg-[url('../../public/images/bg-img.jpg')] bg-cover bg-center text-white">
+        <div className="h-[100vh] bg-gradient-to-b lg:bg-gradient-to-r from-[#062349dc] to-[#3c424785]">
+          <div className="max-w-[1121px] mx-auto px-2 xl:px-0">
+            <Navbar />
+            <div className="grid grid-cols-1 md:grid-cols-2 mt-5 md:mt-28">
+              <div id="text-animation">
+                <h2
+                  id="text-animation"
+                  className={`text-[37px] lg:text-[48px] leading-[40px] md:leading-[50px] ${oswald.variable} font-oswald`}
+                >
+                  HARBOUR LIGHTS DE{" "}
+                  <span className="text-primary-blue">GRESOGONO</span>
+                </h2>
+                <p
+                  id="text-animation"
+                  className="text-[14px] lg:text-[25px] font-[700] mt-2 mb-10"
+                >
+                  1, 2 & 3 Bedrooms Seaside Apartments in Dubai Maritime City
+                </p>
+                <div>
+                  <p className="text-[12px] md:text-[14px] font-[400] bg-[#00000042] w-full sm:w-[305px] px-3 md:px-5 py-1 md:py-2 border-l-4 border-primary-blue">
+                    Rental Returns of{" "}
+                    <span className="font-[600] text-[14px] md:text-[16px]">
+                      UPTO 11%**
+                    </span>
+                  </p>
+                  <p className="text-[12px] md:text-[14px] font-[400] bg-[#00000042] w-full sm:w-[305px] mt-3 px-3 md:px-5 py-1 md:py-2 border-l-4 border-primary-blue">
+                    Capital Appreciation of{" "}
+                    <span className="font-[600] text-[14px] md:text-[16px]">
+                      UPTO 32%**
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div className="lg:justify-self-end">
+                <div
+                  ref={animationRef}
+                  className="w-full sm:w-[303.08px] backdrop-blur-md rounded-[14px] mt-5 md:mt-0"
+                >
+                  <div className="px-5 py-7">
+                    <p className="text-[13px]">PRICING STARTS FROM</p>
+                    <div className={`${oswald.variable} font-oswald`}>
+                      <h1 className="text-[48px] font-[500]">$ 425,000</h1>
+                      <p>AED 1.3 Million</p>
+                    </div>
+                    <button className="text-[13px] bg-primary-blue hover:bg-sky-400 w-full mt-5 py-3 rounded-[5px]">
+                      GET A PRESENTATION
+                    </button>
+                  </div>
+                  <div className="text-[13px] font-[400] leading-[17px] px-5 pt-3 pb-5 border-t-2 border-black">
+                    Get an Expert’s Presentation of Real Estate in Dubai for
+                    Life and investment
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="bg-[#F4F9FF] py-10">
+        <div className="max-w-[1121px] mx-auto grid grid-cols-2 gap-8 lg:grid-cols-4">
+          {characterstics.map((character, i) => (
+            <div
+              key={i}
+              id="character-animation"
+              className="text-[#00357B] text-center"
+            >
+              <Image
+                src={character.logo}
+                alt="logo-images"
+                className="mx-auto"
+              />
+              <p className="text-[12px] lg:text-[16px] font-[400] mt-2">
+                {character.text}
+              </p>
+              <p
+                className={`text-[25px] lg:text-[30px] font-[500] leading-5 ${oswald.variable} font-oswald`}
+              >
+                {character.title}
+              </p>
+              <div className="w-[73px] h-[5px] bg-[#d7e1ef] rounded-[13px] mt-3 mx-auto"></div>
+            </div>
+          ))}
+        </div>
       </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="max-w-[1121px] mx-auto px-2 xl:px-0">
+        <Image
+          id="feature-animation"
+          src={harbourLogo}
+          className="mx-auto mt-10"
+        />
+        <h1
+          id="feature-animation"
+          className={`text-[31px] lg:text-[36px] font-[500] text-[#00357B] text-center mt-5 mb-2 ${oswald.variable} font-oswald`}
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
+          FEATURES & AMENTIES
+        </h1>
+        <p
+          id="feature-animation"
+          className="text-[16px] font-[400] text-[#343434] text-center lg:w-[777px] lg:mx-auto"
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+          Harbour Lights beautifully honours maritime voyages while embracing an
+          opulent seafront lifestyle. Its maritime-inspired amenities provide an
+          unmatched seaside experience, offering a life of tranquility and
+          bliss.
+        </p>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-10 mt-10 mb-5">
+          {features.map((feature, i) => (
+            <div id="feature-animation" key={i}>
+              <FeaturesCard img={feature.img} text={feature.text} />
+            </div>
+          ))}
+        </div>
+        <p className="text-[#686868] text-[10px] font-[300] text-center lg:text-end">
+          *T&Cs apply | ** Based on similar branded projects in the last 2
+          years. Source 1 | Source 2
+        </p>
+        <div className="flex gap-3 justify-center lg:justify-end text-[13px] font-[700] mt-10 mb-5">
+          <button
+            id="bigimage-animation"
+            className="bg-[#00357B] text-white rounded-[5px] px-10 py-3"
+          >
+            EXTERIORS
+          </button>
+          <button
+            id="bigimage-animation"
+            className="border-2 border-[#00357B] text-[#00357B] rounded-[5px] px-10 py-3"
+          >
+            INTERIORS
+          </button>
+        </div>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        {/* this is external component for image crasoul start*/}
+        <ImageGallery />
+        {/* image gallery carasoul end */}
+      </div>
+      <div className="bg-[#091D41] py-10 text-center text-white mt-16 lg:mt-20">
+        <p className="text-[14px] font-[400]">
+          © DAMAC Copyright 2024 All rights reserved.
+        </p>
       </div>
     </main>
   );
